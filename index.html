@@ -1,0 +1,995 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="utf-8">
+<title>Ejemplo Practica 1 Móvil</title>
+<link rel= " stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css ">
+<script src= " http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src= " http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js "> </script>
+
+<style type="text/css">
+    #outerCircleText {
+        font-style:oblique;
+        font-weight: bold;
+        font-family: 'verdana', arial;
+        color:#63F;
+    position: absolute;top: 0;left: 0;z-index: 3000;cursor: default;}
+    #outerCircleText div {position: relative;}
+    #outerCircleText div div {position: absolute;top: 0;left: 0;text-align: center;}
+</style>
+
+
+
+
+<script type="text/javascript">
+
+;(function(){
+
+var msg = "Comienza!!"; //aki cambien el texto, este sera el que siga al raton
+
+var size = 20;//tamaño de la letra
+var circleY = 0.75; var circleX = 3;
+var letter_spacing = 5;
+var diameter = 5;
+var rotation = 0.1;
+var speed = 0.1;
+
+if (!window.addEventListener && !window.attachEvent || !document.createElement) return;
+
+msg = msg.split('');
+var n = msg.length - 1, a = Math.round(size * diameter * 0.408333), currStep = 20,
+ymouse = a * circleY + 20, xmouse = a * circleX + 20, y = [], x = [], Y = [], X = [],
+o = document.createElement('div'), oi = document.createElement('div'),
+b = document.compatMode && document.compatMode != "BackCompat"? document.documentElement : document.body,
+
+mouse = function(e){
+ e = e || window.event;
+ ymouse = !isNaN(e.pageY)? e.pageY : e.clientY; // y-position
+ xmouse = !isNaN(e.pageX)? e.pageX : e.clientX; // x-position
+},
+
+makecircle = function(){
+ if(init.nopy){
+  o.style.top = (b || document.body).scrollTop + 'px';
+  o.style.left = (b || document.body).scrollLeft + 'px';
+ };
+ currStep -= rotation;
+ for (var d, i = n; i > -1; --i){
+  d = document.getElementById('iemsg' + i).style;
+  d.top = Math.round(y[i] + a * Math.sin((currStep + i) / letter_spacing) * circleY - 15) + 'px';
+  d.left = Math.round(x[i] + a * Math.cos((currStep + i) / letter_spacing) * circleX) + 'px';
+ };
+},
+
+drag = function(){
+ y[0] = Y[0] += (ymouse - Y[0]) * speed;
+ x[0] = X[0] += (xmouse - 20 - X[0]) * speed;
+ for (var i = n; i > 0; --i){
+  y[i] = Y[i] += (y[i-1] - Y[i]) * speed;
+  x[i] = X[i] += (x[i-1] - X[i]) * speed;
+ };
+ makecircle();
+},
+
+init = function(){
+ if(!isNaN(window.pageYOffset)){
+  ymouse += window.pageYOffset;
+  xmouse += window.pageXOffset;
+ } else init.nopy = true;
+ for (var d, i = n; i > -1; --i){
+  d = document.createElement('div'); d.id = 'iemsg' + i;
+  d.style.height = d.style.width = a + 'px';
+  d.appendChild(document.createTextNode(msg[i]));
+  oi.appendChild(d); y[i] = x[i] = Y[i] = X[i] = 0;
+ };
+ o.appendChild(oi); document.body.appendChild(o);
+ setInterval(drag, 25);
+},
+ascroll = function(){
+ ymouse += window.pageYOffset;
+ xmouse += window.pageXOffset;
+ window.removeEventListener('scroll', ascroll, false);
+};
+o.id = 'outerCircleText'; o.style.fontSize = size + 'px';
+if (window.addEventListener){
+ window.addEventListener('load', init, false);
+ document.addEventListener('mouseover', mouse, false);
+ document.addEventListener('mousemove', mouse, false);
+  if (/Apple/.test(navigator.vendor))
+   window.addEventListener('scroll', ascroll, false);
+}
+else if (window.attachEvent){
+ window.attachEvent('onload', init);
+ document.attachEvent('onmousemove', mouse);
+};
+})();
+</script>
+</head>  
+<body>
+<div data-role="page" id="principal">
+	<div data-role="header">
+
+		<h1 style="color:#63F">Formularios</h1>
+	  <div align="center"> <a href="#mypup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all"> Facebook </a> 
+  <div data-role="popup" id="mypup">
+<p> uzumaky Irasshaimase </p>
+</div>
+  <img src="Imagenes/Imagen7.jpg" width="238" height="189"><img src="Imagenes/Imagen.gif" width="257">
+         <a href="#mypop" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all"> E-mail </a> 
+<div data-role="popup" id="mypop">
+<p> gatita_baez97@hotmail.com </p>
+</div>
+<br>
+    <Script language="JavaScript">
+mensagem = prompt("Por favor, ingresa tu nombre",'');
+if (mensagem==  null) {
+document.write("¡Hola, visitante!")
+}else{
+if (mensagem=='') {
+document.write("<b><font face=arial size=3 color=#871F78>¡Hola, visitante!</font></b>")
+}else{
+document.write("<b><font face=arial size=3 color=#871F78>¡Hola<br>"+ mensagem+"! Bienvenid@ a mi sitio</font></b>");
+}
+}
+</script>
+	</div>
+	</div>
+	<div data-role="content">	
+		<ul data-role="listview">
+     <li><a href="#algebra" data-transition="slide" data-icon="home"> <img src="Imagenes/Imagen1.jpg" width="248" height="225"> Álgebra</a>    </li>
+    <li><a href="#geometria y trigonometria" data-transition="fade" data-icon="alert"><img src="Imagenes/Imagen4.jpg" width="238" height="194">Geometria y Trigonometria</a></li>
+    <li><a href="#geometria analitica" data-transition="flip" data-icon="info"><img src="Imagenes/Imagen14.jpg" width="245" height="180">Geometria analitica</a></li>
+        <li><a href="#Calculo diferencial" data-transition="flip" data-icon="info"><img src="Imagenes/Imagen12.JPG" width="257" height="177">Calculo Diferencial</a> </li>
+		</ul>		
+	</div>
+         <a href="#myguns" data-rel="popup" data-position-to="window">
+         <img src="Imagenes/Imagen22.jpg" alt="Skaret View" style="width:100px;"></a>
+         <div data-role="popup" id="myguns">
+         <p>Esta es tu reaccion !!</p>
+         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img src="Imagenes/Imagen22.jpg" alt="Skaret Viev" width="656" height="994" style="width:800px;height:800px;">
+</div> 
+<br>
+<div data-role="content">
+<div data-role="collapsible-set"> 
+<div data-role="collapsible" data-collapsed="true">
+<h1> Da click aqui! </h1><br>
+<a href="#myimg" data-rel="popup" data-position="window">
+<img src="Imagenes/Imagen5.png" alt="Skaret View" style="width:100px"></a>
+<div data-role="popup" id="myimg">
+<p>--Aburrido?--</p>
+<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-rigth">Close</a><img src="Imagenes/Imagen5.png" style="width:800px;height:500px" alt="Skaret View">
+</div>
+</div>
+</div>
+<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+    <ul>
+     <li><a href="#principal" data-transition="slide" data-icon="home">INICIO</a>    </li>
+    <li><a href="#Ayuda" data-transition="fade" data-icon="alert">AYUDA</a>    </li>
+    <li><a href="#Contacto" data-transition="flip" data-icon="star">CONTACTO</a> </li>
+    </ul>
+    </div>
+	</div>
+
+    </div>
+</div>
+
+
+<div data-role="page" id="algebra">
+  <div data-role="header">
+      <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back">Come Back</a>
+    <h1>Algebra</h1>
+  </div>
+ 
+     <center><marquee direction="up" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="1" style="border: 2px solid #000; height: 200px; padding: 3px; text-align: center; width: 200px;">
+
+<a href="#algebra">Algebra</a><br />
+<a href="#geometria y trigonometria">Geometria y Trigonometria</a><br />
+<a href="#geometria analitica">Geometria analitica</a>
+<a href="#Calculo diferencial">Calculo Diferencial</a><br />
+</marquee></center>
+
+ <center><img src="Imagenes/Imagen25.JPG"></center>
+  <div data-role="content">
+       <div align="center"><h2>Temario</h2></div>
+<table border="3" align="center" width="682" height="483">       
+       <tr>
+       <ol type="A">
+   <td width="179" align="center"> Unidad 1 Introduccion al algebra
+<li>	Expresion algebraica </li>
+<li>	Termino algebraico o monomio </li>
+<li>    Terminos semejantes</li>
+<li>	Clasificacion de expresiones algebraicas</li>
+<li>    Monomio</li>
+<li>    Polinomio</li>
+<li>    Notacion algebraica</li>
+<li>    Evaluacion numerica de expreciones algebraicas</li>
+</td>
+       </ol>
+      
+       
+	   <ol type="A">
+<td width="300" align="center">	Unidad 2 Operaciones fundamentales 
+<li>	Operaciones fundamentales </li>
+<li>    ... Suma,Resta,Multiplicacion de polinomios </li>
+<li>    ...Multiplicacion de un monomio por un polinomio,Multiplicacion con suma y resta</li>
+<li>    ...Division de polinomios,Monomios,Polinomio entre un monomio</li>
+<li>    Productos notables </li>
+<li>    ...Binomio al cuadrado</li>
+<li>    ...Producto de dos binomios con un termino comun</li>
+<li>    Factorizacion</li>
+<li>    ..Factor comun</li>
+<li>    ...Trinomio cuadrado perfecto</li>
+<li>    ...Trinomio de la forma x^2+bx+c</li>
+<li>    ...Trinomio de la forma ax[2+bx+c</li>
+<li>    ...Diferencia de cuadrados perfectos</li>
+<li>    ...Cubo perfecto de binomios</li>
+<li>    ...Suma o diferencia de dos productos iguales</li>
+<li>    Fracciones algebraicas</li>}
+<li>    ...Simplificacion de fracciones</li>
+<li>    ...Multiplicacion de fracciones</li>
+<li>    ...Division de fracciones</li>
+<li>    ...Operaciones combinadas</li>
+</td>
+		</ol>
+        
+      
+       
+		<ol type="A">
+<td width="177" align="center">	Unidad 3 Ecuaciones
+<li>	Ecuaciones lineales</li>
+<li>	Ecuaciones cuadraticas o de segundo grado </li>
+</td>
+
+       </ol>
+     
+     </tr>
+
+</table> 
+<br>
+<h3>Expresión Algebraica</h3>
+Algebra:El algebra es una disiplina matematica que nos permite resolver diversas situaciones como por ejemplo acertijos,adivinanzas o situaciones problematicas en las que se ignora uno o mas datos,a los que se denomina incognitas o variable.Hablar de algebra es hablar de un sistema de lenguaje, ya que en el se utiliza una serie de  simbolos que son capaces de expresar un problema real.
+<br>
+3+4+3+6 <---Suma aritmetica
+<br>
+5a+4a+3a+6a <----Suma algebraica
+<br>
+<h3>Termino Algebraico o Monomio</h3>
+Expresion algebraica formada por un numero concreto y literales.
+-3x^2 (- <-Simbolo)(3<-Coeficiente)(x<-Literal)(^2<-Exponente).
+El signo indica que un termino si es positivo (+) o si es negativo (-) y cuando se omite el signo es por que es positivo.
+Coeficientes son los numeros concretos que aparecen multiplicando a las literales.
+<h3>Terminos semejantes</h3>
+Los terminos semejantes son dos o más terminos que tienen la misma parte literal.
+<br>
+ab^2, -3ab^2. 15m^2n^3, -8m^2n^3.
+<br>
+...^-------^................. ^-------^..
+<br>
+   |Terminos semejantes(ab^2 y m^2n^3)|
+   <br>
+El grado de un termino es la suma de los exponentes de sus factores literales asi el termino 8a es el primer grado,(2a)(b)=2ab es de segundo grado,(7x)(y^3)=7xy^3 es de cuarto grado.
+<h3>Lenguaje algebraico</h3>
+Para resolver problemas matematicos se requiere escribir una expresion algebraica que represente un enunciado verbal y viceversa.Tenemos una expresion algebraica y la convertiremos en un enunciado verbal.
+<br>
+<br>
+<table border="2" align="center">
+<tr align="center"><td>Expresion Algebraica.</td>
+    <td>Expresion verbal.</td>
+</tr>
+<tr align="center"><td>x^3+y^3</td>
+<td>La suma de los cubos </td>
+</tr>
+<tr align="center"><td>a-b</td>
+<td>Resta de dos numeros o diferencia</td>
+</tr>
+<tr align="center"><td>a.b^2</td>
+<td>El producto de un numero por el cuadrado del otro o multiplicacion</td>
+</tr>
+</table>
+<h3>Reducion de terminos semejantes</h3>
+En ocasiones resulta necesario reducir terminos semejantes.
+...10m^2-7m^2= 3m^2
+<h3>Operacion de los polinomios</h3>
+Monomio:Es un polinomio que consta de un solo termino.Ejemplo:6m^3
+Binomio:Es un polinomio que consta de dos terminos.Ejemplo:a-2b
+Trinomio:Es un polinomio que consta de tres terminos.Ejemplo:7x^2-5x+6
+Si consta de cuatro terminos decimos que es un polinomio de cuatro terminos y asi sucesivamente.
+<h3>Suma de polinomios</h3>
+<p>Para sumar dos o más polinomios sse requiere reducir los terminos semejantes de los polinomios que se van a sumar.
+  Ejemplo:
+  4x^3-8+6x^2-x^4-9x;2x-4x^2-5+x^3-x^4;-5x^3-2x^4+19+3x-x^2
+  <br>
+  <br>
+  -x^4+4x^3+6x^2-9x-8 <br>
+  -x^4+x^3-4x^2+2x-5
+  <br>
+  -2x^4-5x^3-x^2+3x+19
+  <br>
+  -----------------------------
+  <br>
+  -x^4+0+x^2-4x+6
+  
+  <h3>Resta de polinomios</h3>
+  Se describe el minuendo con sus pocos signos y acontinuación el sustraendo con los signos combinados y se reduce terminos semejantes si los hay Por ejemplo:
+  <br>
+ - 4a^2b(Sustraendo)de - 5a^2(minuendo)por b
+ <br>
+  <br>
+  - 5a^2b
+  <br>
+  - 4a^2b
+  <br>
+  -------
+  <br>
+  -9a^2b
+ <br>
+ <h3>Signos de Agrupacion</h3>
+ Los signos de agrupacion sin de 4, el parentesis (), el corchete [], las llaves {}, el vinculo o la barra ---.
+ <h4>Regla general para suprimir los signos de agrupacion</h4>
+ 1.-Para suprimir signos de agrupacion del signo ,mas (+)(Precendidos) se deja el mismo signo que tenga a cada unade las cantidadesque se hayan dentro de el.
+ 2.-Para suprimir signos de agrupacion precedido del signo menos (-) se cambia el signo a cada una de las cantidades que se hayan dentro de el o utilizando la ley de los sgnos.
+ Ejemplo:
+ <br>
+ 	Suprimir los signos de agrupacion
+    <br>
+    <br>
+  5x+(-x-4)-[-4+4x]+{x-6}
+  <br>
+  5x-x-4+4-4x+x-6
+  <br>
+  Reducimos terminos
+  <br>
+   x-6
+  </div>
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+    <ul>
+     <li><a href="#principal" data-transition="slide" data-icon="home">INICIO</a>    </li>
+    <li><a href="#Ayuda" data-transition="fade" data-icon="alert">AYUDA</a>    </li>
+    <li><a href="#Contacto" data-transition="flip" data-icon="star">CONTACTO</a> </li>
+    </ul>
+    </div>
+	</div>
+
+</div>
+
+<div data-role="page" id="geometria y trigonometria">
+	<div data-role="header">
+    <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back">Come Back</a>
+		<h1>Geometria y trigonometria</h1>
+  </div>     
+  <center><marquee direction="up" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="1" style="border: 2px solid #000; height: 200px; padding: 3px; text-align: center; width: 200px;">
+
+<a href="#algebra">Algebra</a><br />
+<a href="#geometria y trigonometria">Geometria y Trigonometria</a><br />
+<a href="#geometria analitica">Geometria analitica</a>
+<a href="#Calculo diferencial">Calculo Diferencial</a><br />
+</marquee></center>
+	<div data-role="content">
+<center><img src=""></center>
+      <div align="center"><h2>Temario</h2></div>
+<table border="3" align="center" width="682" height="348">       
+       <tr>
+       <ol type="A">
+   <td width="179" align="center"> Unidad 1 Figuras geometricas
+<li>	Generalidades</li>
+<li>	Antecedentes historicos</li>
+<li>    Concepto basico</li>
+<li>	Metodo deductivo</li>
+<li>    Metodo inductivo</li>
+<li>    Angulos</li>
+<li>    ...Notacion y clasificacion</li>
+<li>    ...Sistemas de medicion</li>
+<li>    ...Conversiones</li>
+<li>    ...Teoremas</li>
+<li>    Triangulos</li>
+<li>    ...	Notacion y clasificacion</li>
+<li>    ...Rectas y puntos</li>
+<li>    ...Teoremas</li>
+<li>    Poligonos</li>
+<li>    ...Angulos interiores y exteriores</li>
+<li>    ...Diagonales</li>
+<li>    ...Perimetros y areas</li>
+<li>    ...Teoremas</li>
+<li>    Circunferencias</li>
+<li>    ...Elementos</li>
+<li>    ...Angulos de circunferencia</li>
+<li>    ...Area del circulo</li>
+<li>    ...Perimetro</li>
+<li>    ...Areas de figuras ciculares</li>
+</td>
+       </ol>
+      
+       
+	   <ol type="A">
+<td width="300" align="center">Trigonometria Unidad 2 Relaciones trasendentes
+<li>	Funciones trigonometricas</li>
+<li>    ...Relaciones trigonometricas</li>
+<li>    ...Funciones en el triangulo rectangulo</li>
+<li>    ...Funciones en el  pllano cartesiano</li>
+<li>    ...Funciones en el circulo unitario</li>
+<li>    ...Resolucion de triangulos rectangulos y oblicuangulos</li>
+<li>    Identidades trigonometrias</li>
+<li>    ...Identidades fundamentales</li>
+<li>    ...Demostracion de identidades</li>
+<li>    ...Ecuaciones trigonometricas</li>
+<li>    ...Ecuaciones Exponenciales</li>
+<li>    ...Ecuaciones logaritmicas</li>
+</td>
+		</ol>
+     
+     </tr>
+
+</table> 
+
+El estudio de la geometria permite observar, analizar y reflexionar sobre las propiedades del plano y del espacio.
+Existen dos principales sitemas internacionales de medidas 
+<h3>El sistema metrico decimal</h3>
+<table width="369" border="2" align="center">
+<tr>
+<td width="72">Unidad</td>
+<td width="50">Simbolo</td>
+<td width="165">Equivalencias en m(metros)</td>
+<td width="52"> Potencia</td>
+</tr>
+<tr>
+<td>Megametro</td>
+<td>Mm</td>
+<td>1000000m</td>
+<td>10^m5</td>
+</tr>
+<tr>
+<td>Kilometro</td>
+<td>Km</td>
+<td>1000m</td>
+<td>10^3m</td>
+</tr>
+<tr>
+<td>Hectometro</td>
+<td>hm</td>
+<td>100m</td>
+<td>10^2m</td>
+</tr>
+<tr>
+<td>Decametro</td>
+<td>dam</td>
+<td>10m</td>
+<td>10^1m</td>
+</tr>
+<tr>
+<td>Metro</td>
+<td>m</td>
+<td>1m</td>
+<td>10^0m</td>
+</tr>
+<tr>
+<td>Decimetro</td>
+<td>dm</td>
+<td>0.1m</td>
+<td>10^-1m</td>
+</tr>
+<tr>
+<td>Centimetro</td>
+<td>cm</td>
+<td>0.01m</td>
+<td>10^-2m</td>
+</tr>
+<tr>
+<td>Milimetro</td>
+<td>mm</td>
+<td>0.001</td>
+<td>10^-3m</td>
+</tr>
+</table>
+
+<h3>Sistema Anglosajon</h3>
+
+Cuyas principales unidades de medidas son :
+Yarda, Milla, Pie, Pulgada.
+<br>
+La relacion entre ambas unidades es la siguiente:
+<br>
+Yarda= 0.9144m, Milla=1609.34m, Pie=30.48cm, Pulgada=2.54cm.
+
+</div>
+	<div data-role="footer" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+    <ul>
+     <li><a href="#principal" data-transition="slide" data-icon="home">INICIO</a>    </li>
+    <li><a href="#Ayuda" data-transition="fade" data-icon="alert">AYUDA</a>    </li>
+    <li><a href="#Contacto" data-transition="flip" data-icon="star">CONTACTO</a> </li>
+    </ul>
+    </div>
+	</div>
+</div>
+
+
+<div data-role="page" id="geometria analitica">
+	<div data-role="header">
+        <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back">Come Back</a>
+		<h1>Geometria analitica</h1>
+	</div>
+         <center><marquee direction="up" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="1" style="border: 2px solid #000; height: 200px; padding: 3px; text-align: center; width: 200px;">
+
+<a href="#algebra">Algebra</a><br />
+<a href="#geometria y trigonometria">Geometria y Trigonometria</a><br />
+<a href="#geometria analitica">Geometria analitica</a>
+<a href="#Calculo diferencial">Calculo Diferencial</a><br />
+</marquee></center>
+	<div data-role="content">
+       <center> <img src=""> </center>
+       <br>
+      <div align="center"><h2>Temario</h2></div>
+<table border="3" align="center" width="682" height="348">       
+       <tr>
+       <ol type="A">
+   <td width="179" align="center"> Unidad 1 Sistemas coordenados
+<li>	Sistemas rectangulares</li>
+<li>	Puntos en el plano</li>
+<li>    Distancia entre dos puntos</li>
+<li>	Division de un segmento en una razon dada</li>
+<li>    Punto medio</li>
+<li>    Perimetros y areas</li>
+<li>    Sistemas polares</li>
+<li>    ...Elementos</li>
+<li>    ...Transformaciones</li>
+<li>    ...Trasformaciones de sistemas rectangulares a polares</li>
+<li>    ...Trasformaciones de sistemas polares a rectangulares</li>
+</td>
+       </ol>
+      
+       
+	   <ol type="A">
+<td width="300" align="center">	Unidad 2 Lugares Geometricos
+<li>	La recta</li>
+<li>    Propiedades de la recta</li>
+<li>    Formas de la ecuacion de la recta</li>
+<li>    Interseccion de las rectas</li>
+<li>    Relacion entre rectas</li>
+<li>    Rectas notables del triangulo</li>
+<li>    Conicas</li>
+<li>    Circunferancia
+        Propiedades,ecuaciones,condiciones geometricas y analiticas de la        cicunferencia</li>
+<li>    Parabola
+     	Propiedades,ecuaciones,condiciones geometricas y analiticas de la      	parabola</li>
+<li>    Elipse
+   		Propiedades,ecuaciones,condiciones geometricas y analiticas de la 			 		Elipse</li>
+<li>    Hiperbola
+		Propiedades,ecuaciones,condiciones geometricas y analiticas de la				        Hiperbola</li>
+        </td>
+
+		</ol>
+     
+     </tr>
+
+</table> 
+<h3>Geometria analitica</h3>
+
+La Geometria Analitica fue iniciada y desarrollada 
+por el eminente matemático y filósofo Renato 
+Descartes.  Por eso a este sistema de ejes 
+coordenados también se le conoce como "Sistema 
+Cartesiano".
+<br>
+<br>
+Geometria Analitica: sistema de ejes coordenados 
+rectangulares.- Dos rectas que se cortan se 
+encuentran en un mismo plano. Si las líneas son 
+perpendiculares entre sí tenemos lo que se llama 
+un sistema de ejes coordenados rectangulares.
+<br>
+<br>
+En geometria, si trazamos dos rectas numéricas 
+perpendiculares entre sí haciendo coincidir el 
+punto de corte con el cero común, obtenemos un 
+sistema de ejes coordenados rectangular.
+<br>
+<br>
+<div align="center">
+     <img src="Imagenes/Imagen6.gif">
+</div>
+<br>
+La línea X'X se llama eje de las x  o eje de las 
+abscisas y la línea Y'Y se llama eje de las y o 
+eje de las ordenadas.
+<br>
+<br>
+En geometria los ejes dividen al plano en cuatro 
+partes llamadas cuadrantes. XOY es el primer 
+cuadrante, YOX' el  segundo,  X'OY' el tercero y 
+Y'OX el cuarto cuadrante.
+<br>
+<br>
+Podemos decir que el origen O, donde se encuentra 
+el cero común de ambas rectas numéricas, divide a 
+cada eje en dos semiejes, uno positivo  y el otro 
+negativo. Cualquier distancia o posición medida 
+sobre el eje de las x de O hacia la derecha es 
+positiva y de O hacia la izquierda es negativa.
+<br>
+<br>
+Similarmente, cualquier distancia o posición medida 
+sobre el eje de las y de O hacia arriba es positiva 
+y de O hacia abajo es negativa.
+<br>
+<br>
+La distancia de un punto al eje de las ordenadas 
+se llama abscisa del punto y su distancia al eje 
+de las abscisas se llama ordenada del punto. La 
+abscisa y la ordenada del punto son las coordenadas 
+cartesianas del punto. Las abscisas medidas del eje 
+YY' hacia la derecha son positivas y hacia la 
+izquierda, negativas. Las ordenadas medidas del 
+eje XX' hacia arriba son positivas y hacia abajo 
+son negativas.
+<br>
+<br>
+<h3>Ubicacion de un Punto por sus 
+Coordenadas</h3>
+
+Conociendo las coordenadas de un punto se  puede 
+ubicar el punto en el plano. Por ejemplo, ubicar el 
+punto cuyas coordenadas son -3 y 1. Por convención 
+el número que se menciona primero es la abscisa y 
+el segundo la ordenada. La notación empleada para 
+indicar que la abscisa es -3 y la ordenada 1 es 
+(-3 , 1).
+<br>
+<br>
+    <div align="center">
+     <img src="Imagenes/Imagen3.gif">
+</div>  
+<br>
+
+Como la abscisa es negativa , -3, tomamos sobre OX' 
+de O hacia la izquierda tres veces la unidad 
+escogida; en -3 levantamos una perpendicular a OX' 
+y sobre ella llevamos una  vez la unidad hacia 
+arriba porque la ordenada es positiva, 1. El punto 
+P es el punto (-3 , 1), en el segundo cuadrante.  
+<br>
+<h3>Línea recta</h3>
+
+Si l es una recta no paralela al eje Y, y si P ¹ (X ¹, Y ¹) y P ² (X ², Y ²) son puntos diferentes en l, entonces la pendiente o inclinación M de l esta dada por
+<br>
+Y ²- X ¹
+<br>
+M = —————
+<br>
+X ²- X ¹
+<br>
+Si l es paralela al eje, entonces la pendiente no esta definida.
+<br>
+Al numerador Y ²-Y ¹ en la formula para M, en ocasiones se le llama desnivel de P ¹ a P ². Mide el cambio vertical de dirección al avanzar de P ¹ a P ², y puede ser positivo, negativo o cero. El denominador X ² - X ¹ se llama corrimiento de P ¹ a P ². Mide el cambio de dirección horizontal al recorrer de P ¹ a P ². El corrimiento puede ser positivo o negativo, pero nunca cero, porque l no es paralela al eje Y. usando esta terminología,
+<br>
+Desnivel de P ¹ a P ².
+<br>
+Pendiente de l = ————————————
+<br>
+Corrimiento de P ¹ a P ².
+<br>
+Cuando se determina la pendiente o inclinación de una recta l es irrelevante cual punto se denominara P ¹, y cual, P ²,
+<br>
+Y ²- Y ¹ Y ¹ - Y ²
+<br>
+————— = ——————
+<br>
+X ²- X ¹ X ¹ - X ²
+<br>
+En consecuencia, puede suponerse que los puntos se denominan de modo que X ¹ < X ², en este caso, X ²- X ¹ > 0, y por consiguiente, la pendiente es positiva, negativa o cero, dependiendo de si Y ² > Y ¹, Y ² < Y ¹ o bien Y ² = Y ¹. La pendiente de la recta mostrada en la grafica (i) es positiva, en tanto es negativa la pendiente de la recta mostrada en (ii) de la grafica.
+<br>
+Una recta horizontal es una recta paralela al eje X. obsérvese que la recta es horizontal si y solo si su inclinación vale 0. Una recta vertical es un recta paralela al eje Y. la inclinación de una recta vertical es indefinida. 
+<br>
+<br>
+    <div align="center">
+     <img src="Imagenes/Imagen10.png">
+</div>  
+<br> 
+ <br> 
+ 
+ 
+ <h3>La parábola</h3>
+
+Una parábola es el conjunto de todos los puntos de un plano que son equilibrantes de un punto fijo F llamado foco y de una recta fija l denominada directriz situados en el plano.
+<br>
+Ejemplo.
+<br>
+Hallar el foco y la directriz de la parábola que tiene por ecuación Y ² = - 6X y trazar su grafica.
+<br>
+<br>
+    <div align="center">
+     <img src="Imagenes/Imagen13.png">
+</div> 
+<br>
+En consecuencia el foco y la ecuación de la directriz están dados por F (³/², 0) y X = ³/², respectivamente.
+<br>
+<h3>La hipérbole</h3>
+<br>
+La definición de la hipérbole es similar a la de la elipse. La única diferencia es que en lugar de considerar la suma de las distancias a dos puntos fijos, se toma la diferencia.
+<br>
+Una hipérbole es el Conjunto de todos los puntos en un punto plano, tales que la diferencia de sus distancias a dos puntos fijos del plano llamados focos, es una constante positiva.
+<br>
+Ejemplo.
+<br>
+<br>
+    <div align="center">
+     <img src="Imagenes/Imagen16.png">
+</div>
+<br> 
+Analizar y trazar la grafica de la ecuación 9X ² - 4Y ² = 36
+<br>
+Dividimos ambos lados entre 36, tenemos:
+<br>
+X ² Y ²
+<br>
+¯¯¯¯ ¯ ¯¯¯¯ = 1
+<br>
+9
+<br>
+Que esta en la forma canónica establecida en el teorema con a ² = 4 y b ² = 9; es decir, a = 2 y b = 3. Los vértices (± 2, 0) y los puntos extremos (0, ± 3) del eje conjugado determinan un rectángulo, cuyas diagonales (prolongadas) dan las asíntotas. La grafica o las ecuaciones y = ± (b/a) X permiten encontrar las ecuaciones de las asíntotas: y = ± ³/² X. como c ² = a ² + b ² = 4 + 9 = 13, los focos son (±V¯13, 0).
+<br>
+En el ejercicio anterior se muestra que para las hipérboles no siempre se cumple que a < b, como en el caso de las elipses se puede tener a < b, a > b o bien a = b.
+<br>
+	</div>
+    
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+    <ul>
+     <li><a href="#principal" data-transition="slide" data-icon="home">INICIO</a>    </li>
+    <li><a href="#Ayuda" data-transition="fade" data-icon="alert">AYUDA</a>    </li>
+    <li><a href="#Contacto" data-transition="flip" data-icon="star">CONTACTO</a> </li>
+    </ul>
+    </div>
+	</div>
+</div>
+
+<div data-role="page" id="Calculo diferencial">
+	<div data-role="header">
+          <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back">Come Back</a>
+		<h1>Calculo diferencial</h1>
+	</div>
+         <center><marquee direction="up" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="1" style="border: 2px solid #000; height: 200px; padding: 3px; text-align: center; width: 200px;">
+
+<a href="#algebra">Algebra</a><br />
+<a href="#geometria y trigonometria">Geometria y Trigonometria</a><br />
+<a href="#geometria analitica">Geometria analitica</a>
+<a href="#Calculo diferencial">Calculo Diferencial</a><br />
+</marquee></center>
+	<div data-role="content">	
+       <center> <img src=""> </center>       <br>
+       
+       <div align="center"><h2>Temario</h2></div>
+<table border="3" align="center" width="1385" height="251">       
+       <tr>
+       <ol type="A">
+   <td width="329" align="center"> Unidad 1 Funciones
+<li>	Antecedentes Históricos </li>
+<li>	Funciones </li>
+<li>    Clasificación de los diferentes tipos de funciones</li>
+<li>	Análisis grafico de las funciones</li>
+<li>    Operaciones con funciones</li>
+</td>
+       </ol>
+      
+       
+	   <ol type="A">
+<td width="244" align="center">	Unidad 2 Limite y continuidad de funciones 
+<li>	Notación intuitiva del límite </li>
+<li>    Calculo del límite de funciones </li>
+<li>	Continuidad de una función</li>
+</td>
+		</ol>
+        
+      
+       
+		<ol type="A">
+<td width="399" align="center">	Unidad 3 Derivación de funciones
+<li>	Rapidez de variación instantánea </li>
+<li>	Regla general para la derivación (Regla de los 4 pasos) </li>
+<li>	Reglas o fórmulas de derivación para funciones algebraicas </li>
+<li>	Pendiente de la recta tangente a una función en un punto</li> 
+<li>	Regla de la cadena para derivar funciones opuestas </li>
+<li>	Derivación de  funciones implícitas </li>
+<li>	Derivación de funciones transcendentes </li>
+<li>	Derivaciones sucesivas</li>
+       </td>
+       </ol>
+       
+      
+       <ol type="disk">
+<td width="381" align="center"> Unidad 4 Análisis de funciones
+<li> Aplicaciones geométricas de la derivada</li>
+<li> Carácter creciente y decreciente de una función</li> 
+<li> Máximos y mínimos de una función Primer método</li>
+<li> Punto de inflexión y sentido de la concavidad de una curva</li>
+<li> Problemas de optimización sobre máximos y mínimos Área y Volumen</li>
+</td>
+     </ol>
+     
+     </tr>
+
+</table>
+
+  <p align="center">  El cálculo diferencial es una parte del análisis matemático que consiste en el estudio de cómo cambian las funciones cuando sus variables cambian. El principal objeto de estudio en el cálculo diferencial es la derivada. Una noción estrechamente relacionada es la de diferencial de una función.</p>
+  
+  <h3>Noción de derivada</h3>
+  Las derivadas se definen tomando el límite de la pendiente de las rectas secantes conforme se van aproximando a la recta tangente.
+<br>
+Es difícil hallar directamente la pendiente de la recta tangente de una función porque sólo conocemos un punto de ésta, el punto donde ha de ser tangente a la función. Por ello, aproximaremos la recta tangente por rectas secantes. Cuando tomemos el límite de las pendientes de las secantes próximas, obtendremos la pendiente de la recta tangente.
+<br>
+Para obtener estas pendientes, tomemos un número arbitrariamente pequeño que llamaremos h. h representa una pequeña variación en x, y puede ser tanto positivo como negativo. La pendiente de la recta entre los puntos 
+<br>\ (x, f(x))\, y \(x+h, f(x+h))\, es:
+<br>
+<center><img src="Imagenes/Imagen18.png"></center>
+<br>
+Esta expresión es un cociente diferencial de Newton. La derivada de f en x es el límite del valor del cociente diferencial conforme las líneas secantes se acercan más a la tangente:
+<br>
+<center><img src="Imagenes/Imagen8.png"></center>
+<br>
+Si la derivada de f existe en cada punto x, podemos definir la derivada de f como la función cuyo valor en el punto x es la derivada de f en x.
+<br>
+Puesto que la inmediata sustitución de h por 0 da como resultado una división por cero, calcular la derivada directamente puede ser poco intuitivo. Una técnica es simplificar el numerador de modo que la h del denominador pueda ser cancelada. Esto resulta muy sencillo con funciones polinómicas, pero para la mayoría de las funciones resulta demasiado complicado. Afortunadamente, hay reglas generales que facilitan la diferenciación de la mayoría de las funciones descritas.
+<br>
+<br>
+<center><img src="Imagenes/Imagen2.png"></center>
+<br>
+<br>
+
+<center><img src="Imagenes/Imagen21.png"></center>
+
+</div>
+
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+    <ul>
+     <li><a href="#principal" data-transition="slide" data-icon="home">INICIO</a>    </li>
+    <li><a href="#Ayuda" data-transition="fade" data-icon="alert">AYUDA</a>    </li>
+    <li><a href="#Contacto" data-transition="flip" data-icon="star">CONTACTO</a> </li>
+    </ul>
+    </div>
+	</div>
+   
+</div>    
+
+
+
+
+
+<div data-role="page" id="Ayuda">
+	
+    <div data-role="header">
+          <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back">Come Back</a>
+	</div>
+    
+	<div data-role="content">	
+    <center><p><h1>¿Ayuda?</h1></p></center>
+     <center><p><h3>En esa pagina web su proposito es ayudarte en tus materias de Álgebra,Geometria y trigonometria,Geometria analitica,Calculo diferencial y más proximamente</h3></p></center>
+      <center><p><h3>¿Aveces no entiendes algunos problemas? Yo se que si pues a mi tambien me ha pasado tu tranquilo,o tranquila levanta la mano y preguntale al profesor si te hacen burla o algo asi no te preocupes tu solo confia en tu profesor.Si es necesario buscalo despues de clases pero no te quedes con la duda de algun problema o preguntale a un compañero , o compañera que sea buena en esa materia.En esa pagina te dare el temario y algunos ejemplos lo demas es todo tuyo !Vamos tu puedes¡ Yo se que es dificil y algunos dias estan llenos de problemas ,depresion e incluso hostilidad hacia los demas.Habla con tus padres de tus problemas enserio ayuda y mucho</h3></p></center>
+      <center><p><h3>Tu no te enojes, desahogate pero para bien toca algun instrumento o estudia mas, lee un libro o duerme yo que se xDD pero ponte en mente tus metas sueños y lo querias y lucha por completarlos Vamos Haz tu maximo esfuerzo en todo.</h3></p></center>
+       <table width="200" height="315" border="3" align="center">
+  <tr>
+    <td> <center> <img src="Imagenes/Imagen19.jpg"> </center></td>
+    <td> <center> <img src="Imagenes/Imagen20.jpg"> </center></td>
+    <td><center> <img src="Imagenes/Imagen23.jpg" width="359" height="307"> </center></td>
+  </tr>
+</table>
+<br>
+<br>
+	<table align="center"   border="3">
+    <tr><td colspan="4" align="center">He aqui los que arruinaron y fasinaron tu vida con  Geometria Analitica,Calculo diferencial y Algebra.</td></tr>
+    <tr>
+    <td width="212" align="center"><img src="Imagenes/Imagen11.gif" width="212" height="265"> <p align="center">Rene Descartes</p></td>
+   <td width="240" align="center"> <img src="Imagenes/Imagen27.jpg">
+   <p align="center">Newton</p></td>
+    <td width="248" align="center"><img src="Imagenes/Imagen26.jpg"><p align="center">Aurelio Baldor</p></td></tr>
+    </table>
+    <br>
+    <br>
+           <table width="320" border="3" align="center">
+           <tr>
+           <td colspan="4" align="center">Libros que te ayudarian.Todos son de Geometria Y Trigonometria
+           </td></tr>
+  <tr>
+    <td width="79" align="center">Autor:Baldor</td>
+    <td width="82" align="center">Autor:Carlos oropeza</td>
+    <td width="98" align="center">Autor:Benjamin Garza Olvera</td>
+  </tr>
+</table>
+    
+    </div>
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+    <ul>
+     <li><a href="#principal" data-transition="slide" data-icon="home">INICIO</a>    </li>
+    <li><a href="#Ayuda" data-transition="fade" data-icon="alert">AYUDA</a>    </li>
+    <li><a href="#Contacto" data-transition="flip" data-icon="star">CONTACTO</a> </li>
+    </ul>
+    </div>
+	</div>
+    
+</div>
+
+
+
+
+
+
+<div data-role="page" id="Contacto">
+	<div data-role="header"> 
+          <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back">Come Back</a>
+	</div>
+    <div data-role="content">	
+    <h3 align="center">Información de contacto</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <table width="300" border= "2" align="center">
+<tr>
+<td align="center">Nombre</td>
+<td align="center">Itzamara Osorio Baéz</td>
+</tr>
+<tr>
+<td align="center">Dirección</td>
+<td align="center">3 poniente y 5 sur #6</td>
+</tr>
+<tr>
+<td align="center">Grado</td>
+<td align="center">4°</td>
+</tr>
+<tr>
+<td align="center">Grupo</td>
+<td  align="center">"A"</td>
+</tr>
+<tr>
+<td align="center">Escuela</td>
+<td align="center">CBTis 257 "Ricardo Flores Magon"</td>
+</tr>
+<tr>
+<td align="center">E-mail</td>
+<td align="center">gatita_baez97@hotmail.com</td>
+</tr>
+<tr>
+<td align="center">Nombre del profesor</td>
+<td align="center">Enrique Torres Molina</td>
+</tr>
+<tr>
+<td align="center">Correo del profesor</td>
+<td align="center">etm690507@hotmail.com</td>
+</tr>
+<tr>
+<td align="center">Facebook del profesor</td>
+<td align="center">Larry Torres</td>
+</tr>
+<tr>
+<td colspan="2" align="center">Lo puedes encontrar casi siempre en oficinas de laboratorio 1 y 2 o dandonos clase lo que suceda primero.</td>
+</tr>
+<tr>
+<td align="center"><img src="Imagenes/Imagen17.jpg"width="269" height="256"></td>
+<td align="center"><img src="Imagenes/Imagen9.jpg" width="269" height="256"></td>
+</tr>
+  <tr>
+      <td width="98" align="center" colspan="3">Esta version no esta completa espera por mas.</td>
+      </tr>
+</table>
+</div>
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+    <ul>
+     <li><a href="#principal" data-transition="slide" data-icon="home">INICIO</a>    </li>
+    <li><a href="#Ayuda" data-transition="fade" data-icon="alert">AYUDA</a>    </li>
+    <li><a href="#Contacto" data-transition="flip" data-icon="star">CONTACTO</a> </li>
+    </ul>
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>
